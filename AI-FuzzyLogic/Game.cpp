@@ -161,6 +161,7 @@ int Game::getArmySize(float t_force, float t_range)
 	// ( Close AND NOT(Medium) ) OR ( Medium AND Large )
 	m_highVal = FuzzyLogic::OR(FuzzyLogic::AND(m_Close, FuzzyLogic::NOT(m_Medium)), FuzzyLogic::AND(m_Medium, m_Large));
 
+
 	//Defuzzification
 	return static_cast<int>((m_lowVal * 10 + m_mediumVal * 30 + m_highVal * 50) / (m_lowVal + m_mediumVal + m_highVal));
 }
