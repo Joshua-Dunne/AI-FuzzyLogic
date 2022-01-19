@@ -15,10 +15,10 @@ Game::Game() :	m_window(sf::VideoMode(1200u, 896u), "Fuzzy Logic")
 
 	m_bg.setTexture(m_bgTex);
 
-	enemyArmy = new Army(sf::Vector2f{ 1200.0f, 384.0f }, static_cast<int>(m_force), m_range * 10.0f, sf::Color::Red);
+	enemyArmy = new Army(sf::Vector2f{ 1225.0f, 348.0f }, static_cast<int>(m_force), m_range * 10.0f, sf::Color::Red);
 	enemyArmy->beginMoving();
 
-	playerArmy = new Army(sf::Vector2f{ -50.0f, 348.0f }, static_cast<int>(m_sizeToSend), (m_range * 10.0f) - 100.0f, sf::Color::Blue);
+	playerArmy = new Army(sf::Vector2f{ -75.0f, 348.0f }, static_cast<int>(m_sizeToSend), (m_range * 10.0f) - 100.0f, sf::Color::Blue);
 	playerArmy->beginMoving();
 
 	if (!m_font.loadFromFile("./assets/fonts/ariblk.ttf"))
@@ -29,10 +29,11 @@ Game::Game() :	m_window(sf::VideoMode(1200u, 896u), "Fuzzy Logic")
 	m_information.setFont(m_font);
 	m_information.setCharacterSize(32u);
 
-	m_information.setString("Enemy Size: " + std::to_string(static_cast<int>(m_force)) 
-		+ ", Enemy Distance from Base: " 
+	m_information.setString("Enemy Size: " + std::to_string(static_cast<int>(m_force))
+		+ ", Enemy Distance from Base: "
 		+ std::to_string(static_cast<int>(m_range))
-		+ "\n             Calculated Army to send: " + std::to_string(m_sizeToSend));
+		+ "\n             Calculated Army to send: " + std::to_string(m_sizeToSend)
+		+ "\n\n             Press Enter to Re-roll Stats");
 	m_information.setPosition(200.0f, 700.0f);
 }
 
@@ -76,13 +77,30 @@ void Game::processInput()
 			m_window.close();
 		}
 
-		/*if (event.type == sf::Event::KeyPressed)
+		if (event.type == sf::Event::KeyPressed)
 		{
-			if (event.key.code == sf::Keyboard::Enter && nullptr == playerArmy)
+			if (event.key.code == sf::Keyboard::Enter)
 			{
-				
+				m_force = static_cast<float>((rand() % 30) + 1); // 1 -> 30
+				m_range = static_cast<float>((rand() % 81) + 20); // 0 -> 80 + 10 = 20 -> 100
+
+				m_sizeToSend = getArmySize(m_force, m_range);
+
+				delete(enemyArmy);
+				enemyArmy = new Army(sf::Vector2f{ 1225.0f, 384.0f }, static_cast<int>(m_force), m_range * 10.0f, sf::Color::Red);
+				enemyArmy->beginMoving();
+
+				delete(playerArmy);
+				playerArmy = new Army(sf::Vector2f{ -75.0f, 348.0f }, static_cast<int>(m_sizeToSend), (m_range * 10.0f) - 100.0f, sf::Color::Blue);
+				playerArmy->beginMoving();
+
+				m_information.setString("Enemy Size: " + std::to_string(static_cast<int>(m_force))
+					+ ", Enemy Distance from Base: "
+					+ std::to_string(static_cast<int>(m_range))
+					+ "\n             Calculated Army to send: " + std::to_string(m_sizeToSend)
+					+ "\n\n             Press Enter to Re-roll Stats");
 			}
-		}*/
+		}
 	}
 }
 
