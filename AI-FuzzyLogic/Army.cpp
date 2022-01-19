@@ -8,7 +8,7 @@
 /// <param name="t_force">Size of Army</param>
 /// <param name="t_range">Where Army moves to</param>
 /// <param name="t_col">Color of Army</param>
-Army::Army(sf::Vector2f t_startPos, int t_force, double t_range, sf::Color t_col) : 
+Army::Army(sf::Vector2f t_startPos, int t_force, float t_range, sf::Color t_col) : 
 	m_position(t_range), m_startPos(t_startPos), m_armyColor(t_col)
 {
 	for (int i = 0; i < t_force; i++)

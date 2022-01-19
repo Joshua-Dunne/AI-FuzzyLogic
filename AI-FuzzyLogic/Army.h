@@ -8,7 +8,7 @@ class Army
 {
 public:
 	Army() = delete;
-	Army(sf::Vector2f t_startPos, int t_force, double t_range, sf::Color t_col);
+	Army(sf::Vector2f t_startPos, int t_force, float t_range, sf::Color t_col);
 
 	void beginMoving();
 

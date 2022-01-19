@@ -1,8 +1,10 @@
 #include "Game.h"
 
-Game::Game() :	m_window(sf::VideoMode(1200u, 896u), "Lab1")
+Game::Game() :	m_window(sf::VideoMode(1200u, 896u), "Fuzzy Logic")
 {
 	//m_window.setFramerateLimit(60u);
+	m_force = static_cast<float>((rand() % 41) + 10); // 0 -> 40 + 10 = 10 -> 50
+	m_range = static_cast<float>((rand() % 81) + 20); // 0 -> 80 + 10 = 20 -> 100
 
 	m_sizeToSend = getArmySize(m_force, m_range);
 
@@ -13,10 +15,10 @@ Game::Game() :	m_window(sf::VideoMode(1200u, 896u), "Lab1")
 
 	m_bg.setTexture(m_bgTex);
 
-	enemyArmy = new Army(sf::Vector2f{ 1200.0f, 384.0f }, static_cast<int>(m_force), m_range * 10.0, sf::Color::Red);
+	enemyArmy = new Army(sf::Vector2f{ 1200.0f, 384.0f }, static_cast<int>(m_force), m_range * 10.0f, sf::Color::Red);
 	enemyArmy->beginMoving();
 
-	playerArmy = new Army(sf::Vector2f{ -50.0f, 348.0f }, static_cast<int>(m_sizeToSend), (m_range * 10.0) - 100.0f, sf::Color::Blue);
+	playerArmy = new Army(sf::Vector2f{ -50.0f, 348.0f }, static_cast<int>(m_sizeToSend), (m_range * 10.0f) - 100.0f, sf::Color::Blue);
 	playerArmy->beginMoving();
 
 	if (!m_font.loadFromFile("./assets/fonts/ariblk.ttf"))
@@ -127,7 +129,7 @@ int Game::getArmySize(float t_force, float t_range)
 	// Range
 	m_Close = FuzzyLogic::Triangle(t_range, -30.0f, 0.0f, 30.0f);
 	m_Medium = FuzzyLogic::Trapezoid(t_range, 10.0f, 30.0f, 50.0f, 70.0f);
-	m_Far = FuzzyLogic::Grade(t_range, 50.0f, 70.0f);
+	m_Far = FuzzyLogic::Grade(t_range, 50.0f, 120.0f);
 
 	// Rules Matrix & Application
 	// ( Medium AND Tiny ) OR ( Medium AND Small ) OR ( Far AND NOT(Large) )

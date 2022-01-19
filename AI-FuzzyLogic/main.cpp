@@ -19,6 +19,9 @@ int main()
 {
 	try
 	{
+		// randomize a new seed each run
+		srand(static_cast<unsigned int>(time(NULL)));
+
 		Game game;
 		game.run();
 	}
