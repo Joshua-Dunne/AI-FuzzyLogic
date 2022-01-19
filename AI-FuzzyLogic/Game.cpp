@@ -130,13 +130,12 @@ int Game::getArmySize(float t_force, float t_range)
 	m_Far = FuzzyLogic::Grade(t_range, 50.0f, 70.0f);
 
 	// Rules Matrix & Application
-
 	// ( Medium AND Tiny ) OR ( Medium AND Small ) OR ( Far AND NOT(Large) )
-	m_lowVal = FuzzyLogic::OR(FuzzyLogic::OR(FuzzyLogic::AND(m_Medium, m_Tiny), FuzzyLogic::AND(m_Medium, m_Small)),
-							FuzzyLogic::OR(FuzzyLogic::AND(m_Medium, m_Small), FuzzyLogic::AND(m_Far, FuzzyLogic::NOT(m_Large))));
+	m_lowVal = FuzzyLogic::OR(FuzzyLogic::AND(m_Medium, m_Tiny), 
+		FuzzyLogic::OR(FuzzyLogic::AND(m_Medium, m_Small), FuzzyLogic::AND(m_Far, FuzzyLogic::NOT(m_Large))));
 
 	// ( Close AND Tiny ) OR ( Medium AND Moderate ) OR ( Far AND Large )
-	m_mediumVal = FuzzyLogic::OR(FuzzyLogic::OR(FuzzyLogic::AND(m_Close, m_Tiny), FuzzyLogic::AND(m_Medium, m_Moderate)),
+	m_mediumVal = FuzzyLogic::OR(FuzzyLogic::AND(m_Close, m_Tiny),
 		FuzzyLogic::OR(FuzzyLogic::AND(m_Medium, m_Moderate), FuzzyLogic::AND(m_Far, m_Large)));
 
 	// ( Close AND NOT(Tiny) ) OR ( Medium AND Large )
