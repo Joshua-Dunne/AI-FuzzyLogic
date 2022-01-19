@@ -3,7 +3,7 @@
 Game::Game() :	m_window(sf::VideoMode(1200u, 896u), "Fuzzy Logic")
 {
 	//m_window.setFramerateLimit(60u);
-	m_force = static_cast<float>((rand() % 41) + 10); // 0 -> 40 + 10 = 10 -> 50
+	m_force = static_cast<float>((rand() % 30) + 1); // 1 -> 30
 	m_range = static_cast<float>((rand() % 81) + 20); // 0 -> 80 + 10 = 20 -> 100
 
 	m_sizeToSend = getArmySize(m_force, m_range);
