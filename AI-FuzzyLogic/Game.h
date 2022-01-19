@@ -22,7 +22,7 @@ public:
 	void render();
 	int getArmySize(float t_force, float t_range);
 
-	float m_force = 30.0f, m_range = 100.0f;
+	float m_force = 10.0f, m_range = 25.0f;
 	int m_sizeToSend = 0;
 
 	sf::Texture m_bgTex;

@@ -5,12 +5,12 @@
 #include <algorithm>
 
 /// <summary>
-/// 
+/// Fuzzy Logic Implementation
+/// Uses static functions so no class has to be instantiated.
 /// </summary>
 class FuzzyLogic
 {
 public:
-
 	FuzzyLogic() {};
 
 	// Membership Functions
