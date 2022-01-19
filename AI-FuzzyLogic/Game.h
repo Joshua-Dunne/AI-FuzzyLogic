@@ -4,6 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Fuzzy.h"
+#include "Army.h"
 
 class Game
 {
@@ -19,9 +20,19 @@ public:
 	void processInput();
 	void update(sf::Time& dt);
 	void render();
-	double getArmySize(double t_force, double t_range);
+	int getArmySize(float t_force, float t_range);
 
-	double m_force = 8.0, m_range = 25.0, m_sizeToSend = 0.0;
+	float m_force = 30.0f, m_range = 100.0f;
+	int m_sizeToSend = 0;
+
+	sf::Texture m_bgTex;
+	sf::Sprite m_bg;
+
+	sf::Font m_font;
+	sf::Text m_information;
+
+	Army* playerArmy;
+	Army* enemyArmy;
 };
 
 #endif
